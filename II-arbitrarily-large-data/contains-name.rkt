@@ -12,16 +12,18 @@
   (cond
     [(empty? a-list-of-names) #false]
     [(cons? a-list-of-names)
-     (if (equal? (first a-list-of-names) "Flatt")
+     (if (string=? (first a-list-of-names) "Flatt")
          #true
-         (contains-flatt? (rest a-list-of-names)))]
-  ))
+         (contains-flatt? (rest a-list-of-names)))]))
 
 (check-expect (contains-flatt? '()) #false)
 (check-expect (contains-flatt? (cons "Find" '()))
               #false)
 (check-expect (contains-flatt? (cons "Flatt" '()))
               #true)
+(check-expect
+  (contains-flatt? (cons "X" (cons "Y"  (cons "Z" '()))))
+  #false)
 (check-expect
   (contains-flatt?
     (cons "A" (cons "Flatt" (cons "C" '()))))
