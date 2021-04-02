@@ -9,26 +9,19 @@
 ; List-of-Names -> Boolean
 ; determines whether "Flatt" is in a-list-of-names
 (define (contains-flatt? a-list-of-names)
-  (contains? "Flatt" a-list-of-names))
-
-; String List-of-Names -> Boolean
-; determins whether name is in a-list-of-names
-(define (contains? name a-list-of-names)
-   (cond
+  (cond
     [(empty? a-list-of-names) #false]
     [(cons? a-list-of-names)
-     (if (string=? (first a-list-of-names) name)
+     (if (equal? (first a-list-of-names) "Flatt")
          #true
-         (contains? name (rest a-list-of-names)))]))
+         (contains-flatt? (rest a-list-of-names)))]
+  ))
 
 (check-expect (contains-flatt? '()) #false)
 (check-expect (contains-flatt? (cons "Find" '()))
               #false)
 (check-expect (contains-flatt? (cons "Flatt" '()))
               #true)
-(check-expect
-  (contains-flatt? (cons "X" (cons "Y"  (cons "Z" '()))))
-  #false)
 (check-expect
   (contains-flatt?
     (cons "A" (cons "Flatt" (cons "C" '()))))
