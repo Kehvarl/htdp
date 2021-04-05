@@ -4,23 +4,25 @@
 ; tabulates sin between n 
 ; and 0 (incl.) in a list
 (define (tab-sin n)
-  (cond
-    [(= n 0) (list (sin 0))]
-    [else
-     (cons
-      (sin n)
-      (tab-sin (sub1 n)))]))
+  (tabulate sin n))
 	
 ; Number -> [List-of Number]
 ; tabulates sqrt between n 
 ; and 0 (incl.) in a list
 (define (tab-sqrt n)
-  (cond
-    [(= n 0) (list (sqrt 0))]
-    [else
-     (cons
-      (sqrt n)
-      (tab-sqrt (sub1 n)))]))
+  (tabulate sqrt n))
+
+; Number -> [List-of Number]
+; tabulates tan between n 
+; and 0 (incl.) in a list
+(define (tab-tan n)
+  (tabulate tan n))
+
+; Number -> [List-of Number]
+; tabulates squares between n 
+; and 0 (incl.) in a list
+(define (tab-sqr n)
+  (tabulate sqr n))
 
 (define (tabulate f n)
   (cond
