@@ -1,0 +1,11 @@
+; Number -> [List-of Number]
+; tabulates sin between n 
+; and 0 (incl.) in a list
+(define (tab-sin n)
+  (cond
+    [(= n 0) (list (sin 0))]
+    [else
+     (cons
+      (sin n)
+      (tab-sin (sub1 n)))]))
+	
