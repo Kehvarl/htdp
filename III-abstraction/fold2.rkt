@@ -1,4 +1,13 @@
-(define (fold1 l)
+#lang racket
+(require 2htdp/universe)
+(require 2htdp/image)
+
+(define (fold2 f bc l)
+  (cond
+    [(empty? l) bc]
+    [else
+     (f (first l)
+        (fold2 bc (rest l)))]))
 
 ; [List-of Number] -> Number
 (define (product l)
@@ -7,8 +16,21 @@
     [else
      (* (first l)
         (product
-          (rest l)))]))
-  
+         (rest l)))]))
+
+
+; graphical constants:    
+(define emt
+  (empty-scene 100 100))
+(define dot
+  (circle 3 "solid" "red"))
+ 
+; Posn Image -> Image 
+(define (place-dot p img)
+  (place-image
+     dot
+     (posn-x p) (posn-y p)
+     img))
 	
 ; [List-of Posn] -> Image
 (define (image* l)
@@ -18,17 +40,3 @@
      (place-dot
       (first l)
       (image* (rest l)))]))
- 
-; Posn Image -> Image 
-(define (place-dot p img)
-  (place-image
-     dot
-     (posn-x p) (posn-y p)
-     img))
- 
-; graphical constants:    
-(define emt
-  (empty-scene 100 100))
-(define dot
-  (circle 3 "solid" "red"))
-
