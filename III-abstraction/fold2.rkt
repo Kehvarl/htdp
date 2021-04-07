@@ -1,13 +1,14 @@
-#lang racket
+#lang htdp/isl
 (require 2htdp/universe)
 (require 2htdp/image)
 
+; function base-case [list] -> function-output
 (define (fold2 f bc l)
   (cond
     [(empty? l) bc]
     [else
      (f (first l)
-        (fold2 bc (rest l)))]))
+        (fold2 f bc (rest l)))]))
 
 ; [List-of Number] -> Number
 (define (product l)
