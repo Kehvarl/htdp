@@ -12,3 +12,9 @@
           (define (f->c f)
             (* (- f 32) (/ 5 9))))
     (map f->c list-of-f)))
+
+(define (translate list-of-posn)
+  (local (
+          (define (posn->pair p)
+            (cons (posn-x p) (cons (posn-y p) '()))))
+    (map posn->pair list-of-posn)))
