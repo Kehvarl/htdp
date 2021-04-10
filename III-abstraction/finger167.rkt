@@ -35,4 +35,16 @@
             (< (price-difference item1) (price-difference item2))))
     (sort list-of-items compare-items)))
 
-              
+(define (eliminate-expensive ua list-of-items)
+  (cond
+    [(empty? list-of-items) '()]
+    [(< (inventory-sales-price (first list-of-items)) ua)
+     (cons (first list-of-items)
+           (eliminate-expensive ua (rest list-of-items)))]
+    [else (eliminate-expensive ua (rest list-of-items))]))
+
+(define (recall name list-of-items)
+  (local (
+          (define (remove-item-name item)
+            (not (string=? (inventory-name item) name))))
+  (filter remove-item-name list-of-items)))
