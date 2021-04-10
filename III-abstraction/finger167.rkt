@@ -42,3 +42,9 @@
      (cons (first list-of-items)
            (eliminate-expensive ua (rest list-of-items)))]
     [else (eliminate-expensive ua (rest list-of-items))]))
+
+(define (recall name list-of-items)
+  (local (
+          (define (remove-item-name item)
+            (not (string=? (inventory-name item) name))))
+  (filter remove-item-name list-of-items)))
