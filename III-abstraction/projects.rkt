@@ -31,9 +31,10 @@
                   lst)))
     (foldr starts-with-letter# '() LETTERS)))
 
-(define LETTER-FREQUENCY (letter-frequency AS-LIST))
+;(define LETTER-FREQUENCY (letter-frequency AS-LIST))
+(define LETTER-FREQUENCY (list (make-letter-counts "a" 1)))
 
-; Dictionary -> Letter
+; Dictionary Letter -> Letter-Count
 ; retuns the letter that is the most common fist-letter in the dictionary
 (define (most-frequent dict)
   (local (
@@ -41,4 +42,22 @@
             (cond [(< (letter-counts-count lc1) (letter-counts-count lc2))
                    lc2]
                   [else lc1])))
-  (foldr max-letter (make-letter-counts "a" 0) LETTER-FREQUENCY)))
+    (foldr max-letter (make-letter-counts "a" 0) LETTER-FREQUENCY)))
+
+; Dictionary Letter -> Dictionary
+; returns a new dictionary made up only of words starting with a given letter
+(define (dict-of-first-letter letter dict)
+  (local (
+          (define (add-if-starts word lst)
+            (cond
+              [(string=? letter (first (explode word)))
+               (cons word lst)]
+              [else lst])))
+    (foldr add-if-starts '() dict)))
+    
+; Dictionary -> List-of-Dictionary
+(define (words-by-first-letter dict)
+  (local (
+          (define (add-dict letter)
+            (dict-of-first-letter letter dict)))
+    (map add-dict LETTERS)))
