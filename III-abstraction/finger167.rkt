@@ -47,4 +47,5 @@
   (local (
           (define (remove-item-name item)
             (not (string=? (inventory-name item) name))))
-  (filter remove-item-name list-of-items)))
+    (filter remove-item-name list-of-items)))
+ 
