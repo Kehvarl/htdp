@@ -1,4 +1,4 @@
-#lang htdp/isl
+#lang htdp/isl+
 (require 2htdp/batch-io)
 
 (define LOCATION "/usr/share/dict/words")
@@ -46,18 +46,14 @@
 
 ; Dictionary Letter -> Dictionary
 ; returns a new dictionary made up only of words starting with a given letter
-(define (dict-of-first-letter letter dict)
-  (local (
-          (define (add-if-starts word lst)
-            (cond
-              [(string=? letter (first (explode word)))
-               (cons word lst)]
-              [else lst])))
-    (foldr add-if-starts '() dict)))
+
+(define (words-starting-with letter dict)
+  (filter (lambda (w) (string=? letter (first (explode w))))
+          dict))
     
 ; Dictionary -> List-of-Dictionary
 (define (words-by-first-letter dict)
   (local (
           (define (add-dict letter)
-            (dict-of-first-letter letter dict)))
+            (words-starting-with letter dict)))
     (map add-dict LETTERS)))
