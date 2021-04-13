@@ -57,3 +57,16 @@
           (define (add-dict letter)
             (words-starting-with letter dict)))
     (map add-dict LETTERS)))
+
+(define (convert-euro list-of-usd)
+  (map (lambda (usd) (/ usd 1.06))
+       list-of-usd))
+
+(define (convert FC list-of-f)
+  (map (lambda (f) (* (/ 5 9) (- f 32)))
+       list-of-f))
+
+(define (translate list-of-posn)
+  (map (lambda (p) (list (posn-x p) (posn-y p)))
+       list-of-posn))
+
