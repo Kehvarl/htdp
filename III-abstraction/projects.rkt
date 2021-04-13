@@ -57,3 +57,36 @@
           (define (add-dict letter)
             (words-starting-with letter dict)))
     (map add-dict LETTERS)))
+
+(define (convert-euro list-of-usd)
+  (map (lambda (usd) (/ usd 1.06))
+       list-of-usd))
+
+(define (convert FC list-of-f)
+  (map (lambda (f) (* (/ 5 9) (- f 32)))
+       list-of-f))
+
+(define (translate list-of-posn)
+  (map (lambda (p) (list (posn-x p) (posn-y p)))
+       list-of-posn))
+
+(define (list-to-exclusive n)
+  (build-list n (lambda (x) x)))
+
+(define (list-to-inclusive n)
+  (build-list n (lambda (x) (+ x 1))))
+
+(define (list-inf-series n)
+  (build-list n (lambda (x) (/ 1 x))))
+
+(define (list-evens n)
+  (build-list n (lambda (x) (* 2 x))))
+
+(define (diagonalize n i)
+  (build-list n (lambda (j) (if (= i j) 1 0))))
+
+(define (diagonal-box n)
+  (build-list n (lambda (i) (diagonalize n i))))
+
+(define (list-diagonals n)
+  (build-list n (lambda (x) (diagonal-box (add1 x)))))
