@@ -14,6 +14,11 @@
       (sorted/l l)
       )))
 
+(define (sorted? cmp l)
+  ((sorted cmp) l))
 
 (check-expect [(sorted string<?) '("b" "c")] #true)
 (check-expect [(sorted <) '(1 2 3 4 5 6)] #true)
+ 
+(check-expect (sorted? < '(1 2 3)) #true)
+(check-expect (sorted? < '(2 1 3)) #false)
