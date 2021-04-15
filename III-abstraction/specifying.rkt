@@ -45,3 +45,23 @@
 
 (check-expect (contains? '(1 2 3) '(1 4 3)) #false)
 (check-expect (contains? '(1 2 3 4) '(1 3)) #true)
+
+
+; X [List-of X] -> [Maybe [List-of X]]
+; returns the first sublist of l that starts
+; with x, #false otherwise
+(define (find x l)
+  (cond
+    [(empty? l) #false]
+    [else
+     (if (equal? (first l) x) l (find x (rest l)))]))
+
+(define (found? x l)
+  (local ((define f (find x l)))
+    (if (equal? f #false) #false
+        (equal? (first f) x))))
+
+(check-expect (find 2 '(1 2 3)) '(2 3))
+
+(check-expect (found? 2 '(1 2 3)) #true)
+(check-expect (found? 5 '(1 2 3 4)) #false)
