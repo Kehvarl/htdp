@@ -23,6 +23,7 @@
 (define (sorted-variant-of k cmp)
   (lambda (l0)
     (and (sorted? cmp l0)
+         (contains? k l0)
          (contains? l0 k))))
 
 ; [List-of X] [List-of X] -> Boolean 
