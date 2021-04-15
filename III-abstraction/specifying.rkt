@@ -59,7 +59,7 @@
 (define (found? x l)
   (local ((define f (find x l)))
     (if (equal? f #false) #false
-        #true)))
+        (equal? (first f) x))))
 
 (check-expect (find 2 '(1 2 3)) '(2 3))
 
