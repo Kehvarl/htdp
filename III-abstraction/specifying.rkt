@@ -65,3 +65,33 @@
 
 (check-expect (found? 2 '(1 2 3)) #true)
 (check-expect (found? 5 '(1 2 3 4)) #false)
+
+
+
+; distances in terms of pixels 
+(define WIDTH 300)
+(define HEIGHT 300)
+
+(define (n-inside-playground? len)
+  (lambda (l)
+    (local ((define (check-in-playground l0)
+              (cond [(empty? l0) #true]
+                    [(and (< (posn-x (first l0)) WIDTH)
+                          (< (posn-y (first l0)) HEIGHT))
+                     (check-in-playground (rest l0))]
+                    [else #false])))
+      (and (= len (length l))
+           (check-in-playground l))))
+    )
+ 
+(check-satisfied (random-posns 3)
+                 (n-inside-playground? 3))
+
+; N -> [List-of Posn]
+; generates n random Posns in [0,WIDTH) by [0,HEIGHT)
+(define (random-posns n)
+  (build-list
+    n
+    (lambda (i)
+      (make-posn (random WIDTH) (random HEIGHT)))))
+
