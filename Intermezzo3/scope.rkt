@@ -13,3 +13,12 @@
   (+ (p1 x 0)
      (+ (p1 x 1) (p2 x))))
 
+
+; [Non-empty-list X] -> X
+; retrieves the last item of ne-l 
+(check-expect (last-item '(a b c)) 'c)
+(check-error (last-item '()))
+(define (last-item ne-l)
+  (match ne-l
+    [(cons lst '()) lst]
+    [(cons fst rst) (last-item rst)]))
